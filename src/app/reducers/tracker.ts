@@ -25,7 +25,20 @@ export const reducer = (state = initialState, action: tracker.Actions): State =>
     }
 
     case tracker.ActionTypes.TRACK_ADDED_TO_CART: {
-      return Object.assign({}, state, { addedToCart: [...state.addedToCart, action.payload].sort() });
+      return Object.assign({}, state, { addedToCart: [...state.addedToCart, action.payload].sort(function(a: Item, b: Item) {
+        var nameA = a.name.toUpperCase();
+        var nameB = b.name.toUpperCase();
+
+        if(nameA < nameB) {
+          return -1;
+        }
+
+        if(nameA > nameB) {
+          return 1;
+        }
+
+        return 0;
+      }) });
     }
 
     case tracker.ActionTypes.TRACK_REMOVE_ITEM_FROM_CART: {
@@ -50,12 +63,14 @@ export const reducer = (state = initialState, action: tracker.Actions): State =>
       return Object.assign({}, state, { addedToCart: [...revisedCart, action.payload].sort(function(a: Item,b: Item) {
 
         if(a.name < b.name) {
-          return 1;
+          return -1;
         }
 
         if(a.name > b.name) {
-          return 0;
+          return 1;
         }
+
+        return 0;
       } ) });
     }
 
