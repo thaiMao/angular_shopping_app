@@ -23,17 +23,13 @@ import { SearchService } from '../search.service';
   `,
   styles: [`
   #search {
-    height: 0px;
+    height: 34px;
     border-radius: 4px;
-    box-shadow: none;
     border: none;
-    padding-left: 16px;
-    width: 200px;
     color: black;
     font-size: 70%;
-    margin-right: 8px;
-    outline: none;
-    background-color: white;
+    width: 200px;
+    padding-left: 8px;
   }
 
   #search:focus {
