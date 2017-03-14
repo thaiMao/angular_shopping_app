@@ -3,9 +3,7 @@ var autoIncrement = require('mongoose-auto-increment');
 var dbURI = 'mongodb://localhost/Order';
 
 if(process.env.NODE_ENV === 'production') {
-  console.log('hi',process.env.MONGOLAB_URI);
-  dbURI = process.env.MONGOLAB_URI;
-
+  dbURI = process.env.MONGODB_URI;
 }
 
 var connection = mongoose.connect(dbURI);
