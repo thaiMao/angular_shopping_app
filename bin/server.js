@@ -13,8 +13,9 @@ const graphiqlExpress = require('apollo-server').graphiqlExpress;
 const makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
 const bodyParser = require('body-parser');
 const chargeCard = require('../payments/stripe');
-const PORT = 8080;
+
 const app = express();
+app.set('port', process.env.PORT || 8080);
 
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,7 +43,7 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '../dist', 'index.html')); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-app.listen(PORT, function() {
-  console.log(`Listening on port ${PORT}`);
+var server = app.listen(app.get('port'), function() {
+  console.log(`Listening on port ${server.address().port}`);
 });
 
