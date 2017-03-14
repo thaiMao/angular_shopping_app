@@ -27,7 +27,7 @@ import { SearchService } from '../search.service';
     border-radius: 4px;
     box-shadow: none;
     border: none;
-    padding: 16px;
+    padding-left: 16px;
     width: 200px;
     color: black;
     font-size: 70%;
