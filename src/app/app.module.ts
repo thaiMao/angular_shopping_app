@@ -32,7 +32,7 @@ import { DialogService, DialogResult } from './dialog.service';
 
 const client = new ApolloClient({
   networkInterface: createNetworkInterface({
-    uri: 'https://cryptic-ravine-38483.herokuapp.com/graphql'
+    uri: 'http://localhost:5000/graphql'
   })
 });
 
