@@ -1,0 +1,103 @@
+<md-card class="payment-form">
+  <md-card-title><md-icon class="card-icon">payment</md-icon><span>Payment</span></md-card-title>
+
+  <form [formGroup]="form"
+  (ngSubmit)="onSubmit(form.value)">
+
+  <md-card-content>
+    <table>
+    <tr>
+      <td>
+        <md-input-container>
+          <input mdInput
+          placeholder="Card Number"
+          data-stripe="number"
+          formControlName="cardNumber">
+        </md-input-container>
+      </td>
+    </tr>
+    <tr>
+      <div *ngIf="formErrors.cardNumber"
+      class="error">
+          <small>{{ formErrors.cardNumber }}</small>
+      </div>
+    </tr>
+    <div formGroupName="expiration">
+      <tr>
+        <td>
+          <md-input-container>
+            <input mdInput
+            placeholder="Expiry Month [MM]"
+            data-stripe="exp_month"
+            formControlName="expMonth">
+          </md-input-container>
+        </td>
+      </tr>
+      <tr>
+        <div *ngIf="subFormErrors.expMonth">
+          <small>{{ subFormErrors.expMonth }}</small>
+        </div>
+      </tr>
+      <tr>
+        <td>
+          <md-input-container>
+            <input mdInput
+            placeholder="Expiry Year [YY]"
+            data-stripe="exp_year"
+            formControlName="expYear"
+            required>
+          </md-input-container>
+        </td>
+      </tr>
+      <tr>
+        <div *ngIf="subFormErrors.expYear">
+          <small>{{ subFormErrors.expYear }}</small>
+        </div>
+      </tr>
+      <tr>
+        <div *ngIf="invalidDate">
+          <small>Expiry date must be greater or equal to current date</small>
+        </div>
+      </tr>
+    </div>
+    <tr>
+      <td>
+        <md-input-container>
+          <input mdInput
+          placeholder="CVC"
+          data-stripe="cvc"
+          formControlName="cvc">
+        </md-input-container>
+      </td>
+    </tr>
+    <tr>
+      <div *ngIf="formErrors.cvc"
+        class="error">
+        <small>{{ formErrors.cvc }}</small>
+      </div>
+    </tr>
+    <tr>
+      <td>
+        <md-input-container>
+          <input mdInput
+          placeholder="Postal Code"
+          data-stripe="address_zip"
+          formControlName="postalCode">
+        </md-input-container>
+      </td>
+    </tr>
+    </table>
+  </md-card-content>
+    <md-card-actions>
+      <div class="submit">
+        <button
+        [disabled]="!form.valid"
+
+        md-raised-button color="primary"
+        type="submit">PAY</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>
+
+

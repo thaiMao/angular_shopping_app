@@ -1,0 +1,24 @@
+<md-grid-list cols="5" rowHeight="120px" class="large-screen">
+      <md-grid-tile>{{ item.name }}</md-grid-tile>
+        <md-grid-tile>{{ item.quantity }}</md-grid-tile>
+        <md-grid-tile>
+          <div #add>
+            <button md-icon-button>
+              <md-icon>add_circle</md-icon>
+            </button>
+          </div>
+          <div #remove>
+            <button md-icon-button>
+              <md-icon>remove_circle</md-icon>
+            </button>
+          </div>
+        </md-grid-tile>
+
+      <md-grid-tile>{{ item.price }}</md-grid-tile>
+      <md-grid-tile>{{ item.price * item.quantity | number:'1.2-2' }}</md-grid-tile>
+</md-grid-list>
+
+<md-grid-list cols="2" rowHeight="120px" class="small-screen">
+      <md-grid-tile>{{ item.name }}</md-grid-tile>
+      <md-grid-tile>{{ item.price * item.quantity | number:'1.2-2' }}</md-grid-tile>
+</md-grid-list>

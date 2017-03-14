@@ -1,0 +1,71 @@
+<md-card class="card">
+  <md-card-header>
+    <md-card-title>
+      <md-icon>shopping_cart</md-icon>
+        <span>Checkout</span>
+    </md-card-title>
+  </md-card-header>
+    <div *ngIf="cart.length !== 0">
+      <md-card-content class="large-screen">
+        <md-grid-list cols="5" rowHeight="50px">
+          <md-grid-tile>Name</md-grid-tile>
+
+              <md-grid-tile>Quantity</md-grid-tile>
+              <md-grid-tile>Add/Remove</md-grid-tile>
+
+            <md-grid-tile>Unit Price</md-grid-tile>
+            <md-grid-tile>Total Price</md-grid-tile>
+          </md-grid-list>
+          <app-checkout-item
+          *ngFor="let item of cart$ | async; trackBy: trackByFn;"
+          [item]="item"></app-checkout-item>
+          <md-grid-list cols="5" rowHeight="60px">
+            <md-grid-tile></md-grid-tile>
+            <md-grid-tile></md-grid-tile>
+            <md-grid-tile></md-grid-tile>
+            <md-grid-tile></md-grid-tile>
+            <md-grid-tile><b>{{ total$ | async | number:'1.2-2'}}</b></md-grid-tile>
+          </md-grid-list>
+      </md-card-content><!-- large-screen -->
+
+      <md-card-content class="small-screen">
+        <md-grid-list cols="2" rowHeight="60px">
+          <md-grid-tile>Name</md-grid-tile>
+          <md-grid-tile>Total Price</md-grid-tile>
+        </md-grid-list>
+          <app-checkout-item
+          *ngFor="let item of cart$ | async; trackBy: trackByFn;"
+          [item]="item"></app-checkout-item>
+          <md-grid-list cols="2" rowHeight="60px">
+            <md-grid-tile></md-grid-tile>
+            <md-grid-tile><b #total>{{ total$ | async | number:'1.2-2'}}</b></md-grid-tile>
+          </md-grid-list>
+      </md-card-content><!-- small-screen -->
+
+
+
+    </div>
+    <div *ngIf="cart.length === 0">
+      <md-card-content>
+        <p>Cart is empty. Go back to add items.</p>
+      </md-card-content>
+    </div>
+
+      <md-card-actions>
+
+
+    <div class="buttons">
+      <div class="button">
+        <button md-raised-button [routerLink]="['/home']">
+        BACK</button>
+      </div>
+
+      <div *ngIf="quantity$ | async"
+      class="button">
+          <button md-raised-button [routerLink]="['/payment']"
+          (click)="onSave()">PAY</button>
+      </div>
+    </div>
+
+      </md-card-actions>
+</md-card>

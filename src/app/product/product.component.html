@@ -1,0 +1,23 @@
+<md-card class="card">
+  <md-card-header class="header">
+    <md-card-title><p><b>{{product.name}}</b></p></md-card-title>
+  </md-card-header>
+
+  <img *ngIf="product.image"
+  md-card-image
+  class="image"
+  src={{product.image}}>
+
+  <div class="spinner"
+  *ngIf="!product.image">
+    <md-spinner></md-spinner>
+  </div>
+
+  <md-card-actions class="actions">
+    <button md-raised-button color="primary"
+    class="buy-btn"
+    (click)="addToBasket()">
+    BUY</button>
+  </md-card-actions>
+</md-card>
+

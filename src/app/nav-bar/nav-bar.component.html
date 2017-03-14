@@ -1,0 +1,53 @@
+<div #navbar>
+  <md-toolbar color="primary">
+      <div #homeBtn>
+        <button md-icon-button
+        routerLink="/home">
+          <md-icon>home</md-icon>
+        </button>
+      </div>
+        <!-- This fills the remaining space of the current row -->
+        <span class="example-fill-remaining-space"></span>
+
+        <button md-icon-button
+        class="cart"
+        (click)="saveDataInStore()"
+        [routerLink]="['/checkout']">
+            <span class="quantity">
+              <small>{{ numberOfItems | async }}</small>
+            </span>
+            <md-icon>shopping_cart</md-icon>
+        </button>
+
+        <app-search
+        *ngIf="url === '/home'"
+        (termEntered)="enterSearchTerm($event)"
+        (termBeingTyped)="termTyping($event)"></app-search>
+
+        <button md-icon-button
+        [mdMenuTriggerFor]="menu">
+          <md-icon>reorder</md-icon>
+        </button>
+
+  </md-toolbar>
+</div>
+<md-menu #menu="mdMenu">
+  <div #homeMenu>
+    <button md-menu-item
+    [routerLink]="['/home']">
+      <md-icon>home</md-icon>
+      <span>Home</span>
+    </button>
+  </div>
+  <div #dashboardMenu>
+    <button md-menu-item
+    [routerLink]="['/admin']">
+      <md-icon>dashboard</md-icon>
+      <span>Dashboard</span>
+    </button>
+  </div>
+</md-menu>
+
+
+
+

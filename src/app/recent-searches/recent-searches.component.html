@@ -1,0 +1,35 @@
+<md-grid-list cols="4" rowHeight="60px">
+
+  <md-grid-tile [colspan]=1>
+    <md-grid-tile-header>
+      Rank
+    </md-grid-tile-header>
+  </md-grid-tile>
+
+  <md-grid-tile [colspan]=2>
+    <md-grid-tile-header>
+      Term
+    </md-grid-tile-header>
+  </md-grid-tile>
+
+  <md-grid-tile [colspan]=1>
+    <md-grid-tile-header>
+      Date
+    </md-grid-tile-header>
+  </md-grid-tile>
+
+  <div *ngFor="let r of recentSearches; let i = index">
+    <md-grid-tile [colspan]=1>
+        {{ i+1 }}
+    </md-grid-tile>
+    <md-grid-tile [colspan]=2>
+        {{ r.term }}
+    </md-grid-tile>
+        <md-grid-tile [colspan]=1>{{ r.date | date }}</md-grid-tile>
+      </div>
+    </md-grid-list>
+
+    <div class="spinner-container"
+    *ngIf="!recentSearches">
+        <md-spinner></md-spinner>
+    </div>
