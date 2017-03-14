@@ -38,6 +38,7 @@ import { SearchService } from '../search.service';
 
   #search:focus {
     background-color: #EAE6F5;
+    color: black;
   }
   `]
 })
