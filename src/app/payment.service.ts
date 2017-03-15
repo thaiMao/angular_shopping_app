@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { CanActivate, Router } from '@angular/router';
 
 //BASE_URL - To pass swipe token to server
-const BASE_URL = 'http://localhost:8080/payment/';
+//const BASE_URL = 'http://localhost:8080/payment/';
+const BASE_URL = 'https://cryptic-ravine-38483.herokuapp.com/payment/'
 const HEADER = { headers: new Headers({ 'Content-Type': 'application/json' }) };
 
 @Injectable()
