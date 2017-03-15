@@ -246,23 +246,7 @@ export class DashboardService {
   }
 
   getSalesFromStore(): Observable<any> {
-    return this.store.select(fromRoot.getDashboardSales)
-               .switchMap((array: any) => {
-
-                  var parseTime = d3.timeParse('%Y-%m-%d');
-                  let sales: Array<any> = [];
-
-                  array.forEach((d: Sales) => {
-
-
-                    let date = moment(d.date).format("YYYY-MM-DD");
-                    let parsedDate = parseTime(date);
-                    sales.push({date: parsedDate, total: d.total });
-                  })
-
-                  return Observable.of(sales);
-               })
-               .do(r => console.log("getSalesFromStore()", r));
+    return this.store.select(fromRoot.getDashboardSales);
   }
 
   getRecentSearchesFromStore(): Observable<Array<Search>> {

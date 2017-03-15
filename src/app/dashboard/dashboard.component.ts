@@ -10,6 +10,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-dashboard',
   template: `
+  <!--
   <md-card
   class="card">
     <md-card-title>Dashboard</md-card-title>
@@ -18,6 +19,7 @@ import * as moment from 'moment';
       <app-chart [data]="salesData$ | async"></app-chart>
     </md-card-content>
   </md-card>
+  -->
 
   <md-card class="card">
     <md-card-title>Sales</md-card-title>
@@ -58,20 +60,6 @@ export class DashboardComponent implements OnInit {
     this.salesData$ = this.dashboardService.getSalesFromStore();
     this.topGrossing$ = this.dashboardService.getTopGrossingFromStore();
 
-
-    this.dashboardService.getSalesFromStore()
-        .subscribe(data => {
-          var parseTime = d3.timeParse('%Y-%m-%d');
-          let sales: Array<any> = [];
-          data.forEach((d: Sales) => {
-
-            let date = moment(d.date).format("YYYY-MM-DD");
-            let parsedDate = parseTime(date);
-
-            sales.push({date: parsedDate, total: d.total });
-
-          })
-        })
   }
 
 }
