@@ -17,6 +17,18 @@ const chargeCard = require('../payments/stripe');
 const app = express();
 app.set('port', process.env.PORT || 8080);
 
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, POST');
+  next();
+});
+app.use(cors());
+
+
+
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -36,6 +48,8 @@ app.use('/graphql', bodyParser.json(), apolloExpress({
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql'
 }));
+
+app.use(cors());
 
 app.post('/payment', chargeCard);
 

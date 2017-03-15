@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node bin/server.js",
+    "start-dev": "concurrently \"ng serve\" \"nodemon bin/server.js\"",
     "build": "ng build --prod --aot",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",

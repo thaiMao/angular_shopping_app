@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { Search } from '../models/searches.model';
 import { ItemSales } from '../models/item.sales.model';
 import { Sales } from '../models/sales.model';
+const d3 = require('d3');
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -55,6 +57,21 @@ export class DashboardComponent implements OnInit {
     this.recentSearches$ = this.dashboardService.getRecentSearchesFromStore();
     this.salesData$ = this.dashboardService.getSalesFromStore();
     this.topGrossing$ = this.dashboardService.getTopGrossingFromStore();
+
+
+    this.dashboardService.getSalesFromStore()
+        .subscribe(data => {
+          var parseTime = d3.timeParse('%Y-%m-%d');
+          let sales: Array<any> = [];
+          data.forEach((d: Sales) => {
+
+            let date = moment(d.date).format("YYYY-MM-DD");
+            let parsedDate = parseTime(date);
+
+            sales.push({date: parsedDate, total: d.total });
+
+          })
+        })
   }
 
 }

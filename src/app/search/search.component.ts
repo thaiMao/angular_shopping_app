@@ -30,6 +30,7 @@ import { SearchService } from '../search.service';
     font-size: 70%;
     width: 200px;
     padding-left: 8px;
+    background-color: white;
   }
 
   #search:focus {

@@ -10,6 +10,7 @@ import * as fromRoot from './reducers';
 import * as dashboard from './actions/dashboard'
 import gql from 'graphql-tag';
 import * as moment from 'moment';
+const d3 = require('d3');
 import 'rxjs/add/operator/mergeMap';
 
 const Orders = gql`
@@ -110,7 +111,13 @@ export class DashboardService {
                                     }, 0)
                                     .bufferTime(1)
                                     .mergeMap((a: any) => {
-                                      return Observable.of({ date: new Date(group.key), total: a[0] })
+
+                                      var parseTime = d3.timeParse('%Y-%m-%d');
+
+                                      let date = moment(group.key).format("YYYY-MM-DD");
+                                      let parsedDate = parseTime(date);
+
+                                      return Observable.of({ date: parsedDate, total: a[0] })
                                     })
                                   })
                })
@@ -131,6 +138,7 @@ export class DashboardService {
 
                  return Observable.of(sortedByDate);
                })
+
 
   }
 
@@ -238,7 +246,23 @@ export class DashboardService {
   }
 
   getSalesFromStore(): Observable<any> {
-    return this.store.select(fromRoot.getDashboardSales);
+    return this.store.select(fromRoot.getDashboardSales)
+               .switchMap((array: any) => {
+
+                  var parseTime = d3.timeParse('%Y-%m-%d');
+                  let sales: Array<any> = [];
+
+                  array.forEach((d: Sales) => {
+
+
+                    let date = moment(d.date).format("YYYY-MM-DD");
+                    let parsedDate = parseTime(date);
+                    sales.push({date: parsedDate, total: d.total });
+                  })
+
+                  return Observable.of(sales);
+               })
+               .do(r => console.log("getSalesFromStore()", r));
   }
 
   getRecentSearchesFromStore(): Observable<Array<Search>> {

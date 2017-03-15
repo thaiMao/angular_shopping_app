@@ -1,3 +1,22 @@
+A shopping app built with Angular2 with a Node backend.
+
+It demonstates the use of @ngrx/store, Rx Observables, 
+Typescript, GraphQL, Stripe, Node, MongoDB.
+
+The product data is taken from the Tesco API via graphQL.
+
+
+![Alt text](angular_app.gif?raw=true "Shopping App in Angular")
+
+# Known Issues
+
+The D3 line chart in the dashboard does not draw in Safari or Firefox.
+
+The Tesco API serves the product images as HTTP.
+
+The top selling items on rare occasions renders the incorrect information.
+
+
 # Ng2Rxjs
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.24.
