@@ -6,6 +6,9 @@ Typescript, GraphQL, Stripe, Node, MongoDB.
 The product data is taken from the Tesco API via graphQL.
 
 
+Try it: https://cryptic-ravine-38483.herokuapp.com/
+
+
 ![Alt text](angular_app.gif?raw=true "Shopping App in Angular")
 
 # Known Issues
